@@ -6,28 +6,37 @@ class App extends Component{
   constructor(props){
     super(props)
 
-    this.notes = [
-      {
-        id: 1,
-        text: 'Paint an illustration.'
-      },
-      {
-        id: 2,
-        text: 'Draw a user interface.'
-      },
-      {
-        id: 3,
-        text: 'App maker festival.'
-      },
-      {
-        id: 4,
-        text: 'Dua Lipa Auckland concert.'
-      },
-      {
-        id: 5,
-        text: 'Instrument recording, mixing.'
-      }
-    ]
+    this.state = {
+      notes: [
+        {
+          id: 1,
+          text: 'Paint an illustration.'
+        },
+        {
+          id: 2,
+          text: 'Draw a user interface.'
+        },
+        {
+          id: 3,
+          text: 'App maker festival.'
+        },
+        {
+          id: 4,
+          text: 'Dua Lipa Auckland concert.'
+        },
+        {
+          id: 5,
+          text: 'Instrument recording, mixing.'
+        }
+      ],
+      noteInputValue : ''
+    }
+
+  }
+
+  handleNoteInputChange = (e)=>{
+    this.setState({noteInputValue:e.target.value})
+    console.log(e.target)
   }
 
   render() {
@@ -38,10 +47,10 @@ class App extends Component{
           <div className="notes">
   
             {
-              this.notes.map(note=>{
+              this.state.notes.map(note=>{
 
                 return (
-                  <div className="note">
+                  <div className="note" key={note.id}>
                     <div className="note-body">
                       <i className="far fa-times-circle note-remove"></i>
                       <div className="note-text">
@@ -58,7 +67,7 @@ class App extends Component{
                       <label htmlFor="note-input">
                           Add a new note
                       </label>
-                      <textarea className="form-control" id="note-input" rows="4"></textarea>
+                      <textarea className="form-control" id="note-input" rows="4" onChange={this.handleNoteInputChange}></textarea>
                   </div>
   
                   <button type="submit" className="btn btn-primary"><i className="fas fa-plus-circle"></i></button>
