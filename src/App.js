@@ -8,26 +8,7 @@ class App extends Component{
 
     this.state = {
       notes: [
-        // {
-        //   id: 1,
-        //   text: 'Paint an illustration.'
-        // },
-        // {
-        //   id: 2,
-        //   text: 'Draw a user interface.'
-        // },
-        // {
-        //   id: 3,
-        //   text: 'App maker festival.'
-        // },
-        // {
-        //   id: 4,
-        //   text: 'Dua Lipa Auckland concert.'
-        // },
-        // {
-        //   id: 5,
-        //   text: 'Instrument recording, mixing.'
-        // }
+        
       ],
       noteInputValue : ''
     }
@@ -54,13 +35,15 @@ class App extends Component{
     })
   }
 
-  handleDeleteButtonClick = (e)=>{
-    var noteIdToDelete = e.target.id
+  handleRemoveNote = (e)=>{
+    var noteIdToDelete = parseInt(e.target.id)
     var notes = this.state.notes
 
     var filteredNotes = notes.filter((item)=>{
       return item.id !== noteIdToDelete
     })
+
+    this.setState({notes:filteredNotes})
   }
 
   render() {
@@ -76,7 +59,7 @@ class App extends Component{
                 return (
                   <div className="note" key={note.id}>
                     <div className="note-body">
-                      <i id={note.id} className="far fa-times-circle note-remove" onClick={this.handleDeleteButtonClick}></i>
+                      <i id={note.id} className="far fa-times-circle note-remove" onClick={this.handleRemoveNote}></i>
                       <div className="note-text">
                       {note.text}
                       </div>
